@@ -1,13 +1,37 @@
 import express from 'express'
 import 'dotenv/config';
 import {dbconnection} from './config/database.js'
-
+import cors from 'cors'
+import helmet from 'helmet'
+import morgan from 'morgan'
+import compression from 'compression'
+import cookieparser from 'cookie-parser'
 
 const app = express();
+
+app.use(helmet());
+
+app.use(cors({
+    origin:process.env.CLIENT_URL,
+    credentials:true,
+}));
+
+app.use(express.json());
+
+app.use(express.urlencoded({extended:true}));
+
+
 const port = process.env.PORT || 6000;
 
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieparser());
+
+app.use(compression());
+
+app.use(morgan("dev"));
 
 app.get('/',(req,res)=>{
     res.send("Hey! Developer");
