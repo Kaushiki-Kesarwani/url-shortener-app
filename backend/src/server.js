@@ -1,14 +1,17 @@
 import express from 'express'
-import dotenv from 'dotenv'
+import 'dotenv/config';
 import {dbconnection} from './config/database.js'
 
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 6000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.get('/',(req,res)=>{
+    res.send("Hey! Developer");
+});
 
 const startServer = async () =>{
     try{
@@ -22,3 +25,5 @@ console.log(`🚀 Server is starting at ${port} port.`)
 }
 
 startServer();
+
+
