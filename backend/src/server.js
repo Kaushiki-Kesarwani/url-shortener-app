@@ -6,6 +6,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import compression from 'compression'
 import cookieparser from 'cookie-parser'
+import errorMiddleware from './middleware.js/error.middleware.js'
 
 const app = express();
 
@@ -33,9 +34,14 @@ app.use(compression());
 
 app.use(morgan("dev"));
 
-app.get('/',(req,res)=>{
-    res.send("Hey! Developer");
-});
+// app.get('/error',(req,res,next)=>{
+//     const error = new error("Testing global error handler");
+//     statusCode = 400;
+
+//     next(error);
+// });
+
+app.use(errorMiddleware);
 
 const startServer = async () =>{
     try{
