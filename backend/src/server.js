@@ -7,6 +7,7 @@ import morgan from 'morgan'
 import compression from 'compression'
 import cookieparser from 'cookie-parser'
 import errorMiddleware from './middleware.js/error.middleware.js'
+import index from './routes/index.js'
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use(morgan("dev"));
 
 //     next(error);
 // });
+app.use('/api',index);
 
 app.use(errorMiddleware);
 
