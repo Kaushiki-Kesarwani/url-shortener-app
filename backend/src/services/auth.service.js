@@ -7,7 +7,7 @@ export const createUserService = async({fullname,email,password})=>{
    const emailExists = await findByEmail(email);
 
    if(emailExists){
-   new ApiError(429,"user already exists.");
+  throw new ApiError(409,"user already exists.");
    }
 
  const hashedPassword = await bcrypt.hash(password,10); 
@@ -17,6 +17,10 @@ const user = await createUser({
     email,
     password:hashedPassword,
     });
-  return user; 
+  return {
+   id: user._id,
+    fullname: user.fullname,
+    email: user.email,
+  }
 }
 
