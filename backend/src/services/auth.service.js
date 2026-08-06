@@ -1,6 +1,8 @@
 import bcrypt from 'bcryptjs'
 import ApiError from '../errors/ApiError.js'
 import {createUser,findByEmail} from '../repositories/user.repository.js'
+import jwt from 'jsonwebtoken'
+
 
 
 export const createUserService = async({fullname,email,password})=>{
@@ -23,4 +25,47 @@ const user = await createUser({
     email: user.email,
   }
 }
+
+export const authUserService = async({email,password})=>{
+  const existingUser = await findByEmail(email);
+  if(!existingUser){
+    throw new ApiError(401,"Invalid email or password");
+  }
+
+  const existingPassword = await bcrypt.compare(password,existingUser.password);
+  if(!existingPassword){
+      throw new ApiError(401,"Invalid email or password");
+  }
+
+  const token = jwt.sign(
+    {
+    userId : existingUser._id,
+    },
+    process.env.JWT_SECRET,
+    {
+    expiresIn:"7d",
+    }
+  );
+
+  return {
+    token,
+    user: {
+        id: existingUser._id,
+        fullname: existingUser.fullname,
+        email: existingUser.email,
+    },
+};
+ 
+}
+ // res.cookie("token", token, {
+  //     httpOnly: true,
+  //     secure: process.env.NODE_ENV === "development",
+  //     sameSite:"strict",
+  //     // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  //     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+  //   });
+
+
+
+
 
