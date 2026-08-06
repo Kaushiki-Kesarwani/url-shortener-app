@@ -1,12 +1,8 @@
 import {Router} from 'express'
+import { signup } from '../controllers.js/auth.controller.js';
 
  const route = Router();
 
-route.get('/',(req,res)=>{
-res.json({
-    success:true,
-    message:"Auth routes working"
-});
- });
+route.post('/signup',signup);
 
  export default route;
