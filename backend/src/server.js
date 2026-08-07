@@ -9,6 +9,7 @@ import cookieparser from 'cookie-parser'
 import errorMiddleware from './middleware.js/error.middleware.js'
 import index from './routes/index.js'
 
+
 const app = express();
 
 app.use(helmet());
@@ -34,6 +35,7 @@ app.use(cookieparser());
 app.use(compression());
 
 app.use(morgan("dev"));
+
 
 // app.get('/error',(req,res,next)=>{
 //     const error = new error("Testing global error handler");
