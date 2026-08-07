@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 import ApiError from '../errors/ApiError.js'
-import {createUser,findByEmail} from '../repositories/user.repository.js'
+import {createUser,findByEmail,findById} from '../repositories/user.repository.js'
 import jwt from 'jsonwebtoken'
 
 
