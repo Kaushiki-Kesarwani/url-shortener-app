@@ -1,4 +1,4 @@
-import { createUrl } from "../repositories/url.repository";
+import { createUrl,findByShortCode } from "../repositories/url.repository";
 import ApiError from '../errors/ApiError'
 import generateShortCode from '../utils/ generateShortCode'
 
@@ -23,3 +23,9 @@ export const  createShortUrl = async (originalUrl,userId) =>{
     const url = await createUrl(urlData);
     return url;
 };
+
+
+export const getUrlByShortCode = async(shortCode)=>{
+    const url = await findByShortCode(shortCode);
+    return url;
+}

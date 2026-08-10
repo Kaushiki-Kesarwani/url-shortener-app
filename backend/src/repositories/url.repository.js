@@ -11,22 +11,22 @@ export const findByShortCode = async(shortCode) =>{
 }
 
 export const findByUser = async(userId)=>{
-    const url = await Url.find(userId);
+    const url = await Url.find({user: userId});
     return url;
 }
 
-export const findById = async(urlId)=>{
-    const url = await findById(urlId);
+export const findByIdUrl = async(urlId)=>{
+    const url = await Url.findById(urlId);
     return url;
 }
 
 export const deleteById = async(urlId)=>{
-    const url = await findByIdAndDelete(urlId);
+    const url = await Url.findByIdAndDelete(urlId);
     return url;
 }
 
 export const incrementClicks = async(shortCode)=>{
-    const url = await findOneAndUpdate(
+    const url = await Url.findOneAndUpdate(
         {shortCode},
         {$inc : {click:1}},
         {new :true}
