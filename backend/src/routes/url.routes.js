@@ -1,12 +1,8 @@
 import {Router} from 'express'
+import { redirectUrl } from '../controllers.js/url.controller';
 
-const route = Router();
+const router = Router();
 
-route.get('/url',(req,res)=>{
-    res.json({
-        success:true,
-        message:"url route is working"
-    });
-});
+router.get('/:shortcode',redirectUrl);
 
-export default route;
+export default router;

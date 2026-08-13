@@ -12,17 +12,24 @@ export const  createShortUrl = async (originalUrl,userId) =>{
         throw new ApiError(401,"User authentication is required");
     }
 
-    const shortCode = generateShortCode();
-
-    const urlData = {
+    const MAX_RETRIES = 5;
+    for(let attempt = 0; attempt<MAX_RETRIES; attempt++){
+         const shortCode = generateShortCode();
+try{
+    const url = await createUrl({
         originalUrl,
         shortCode,
         user:userId,
-    } 
-
-    const url = await createUrl(urlData);
+    }); 
     return url;
-};
+}catch(error){
+ if(error.code !== 11000){
+    throw error;
+ }
+}
+}
+throw new ApiError(500,"Unable to generate short url");
+}
 
 
 export const getUrlByShortCode = async(shortCode)=>{
