@@ -1,4 +1,4 @@
-import { Url } from "../models/Url";
+import { Url } from "../models/Url.js";
 
 export const createUrl = async (data) =>{
 const url = await Url.create(data);

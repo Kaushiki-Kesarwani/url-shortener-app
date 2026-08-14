@@ -6,7 +6,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import compression from 'compression'
 import cookieparser from 'cookie-parser'
-import errorMiddleware from './middleware.js/error.middleware.js'
+import errorMiddleware from './middleware/error.middleware.js'
 import index from './routes/index.js'
 
 

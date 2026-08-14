@@ -1,6 +1,6 @@
-import { createUrl,findByShortCode ,incrementClicks} from "../repositories/url.repository";
-import ApiError from '../errors/ApiError'
-import generateShortCode from '../utils/ generateShortCode'
+import { createUrl,findByShortCode ,incrementClicks} from "../repositories/url.repository.js";
+import ApiError from '../errors/ApiError.js'
+import generateShortCode from '../utils/ generateShortCode.js'
 
 export const  createShortUrl = async (originalUrl,userId) =>{
 
