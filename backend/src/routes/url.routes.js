@@ -1,8 +1,9 @@
 import {Router} from 'express'
-import { redirectUrl } from '../controllers.js/url.controller';
+import { redirectUrl,createUrl } from '../controllers/url.controller.js';
+import {protect} from '../middleware/auth.middleware.js'
 
 const router = Router();
-
-router.get('/:shortcode',redirectUrl);
+router.post("/", protect, createUrl);
+router.get('/:shortCode',redirectUrl);
 
 export default router;
