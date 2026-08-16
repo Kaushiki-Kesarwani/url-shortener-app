@@ -10,7 +10,7 @@ export const findByShortCode = async(shortCode) =>{
     return url;
 }
 
-export const findByUser = async(userId)=>{
+export const findByUserId = async(userId)=>{
     const url = await Url.find({user: userId});
     return url;
 }
@@ -28,7 +28,7 @@ export const deleteById = async(urlId)=>{
 export const incrementClicks = async(shortCode)=>{
     const url = await Url.findOneAndUpdate(
         {shortCode},
-        {$inc : {click:1}},
+        {$inc : {clicks:1}},
         {new :true}
     );
     return url;

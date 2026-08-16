@@ -1,6 +1,7 @@
-import { createUrl,findByShortCode ,incrementClicks} from "../repositories/url.repository.js";
+import { createUrl,findByShortCode ,incrementClicks,findByUserId} from "../repositories/url.repository.js";
 import ApiError from '../errors/ApiError.js'
 import generateShortCode from '../utils/ generateShortCode.js'
+import asyncHandler from "../utils/asyncHandler.js";
 
 export const  createShortUrl = async (originalUrl,userId) =>{
 
@@ -45,5 +46,10 @@ export const getUrlByShortCode = async(shortCode)=>{
 
      await incrementClicks(shortCode);
 
+    return url;
+}
+
+export const getUserUrls = async(userId)=>{
+    const url = await findByUserId(userId);
     return url;
 }
