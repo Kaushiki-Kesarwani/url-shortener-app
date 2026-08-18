@@ -1,4 +1,4 @@
-import { createUrl,findByShortCode ,incrementClicks,findByUserId} from "../repositories/url.repository.js";
+import { createUrl,findByShortCode ,incrementClicks,findByUserId,deleteById} from "../repositories/url.repository.js";
 import ApiError from '../errors/ApiError.js'
 import generateShortCode from '../utils/ generateShortCode.js'
 import asyncHandler from "../utils/asyncHandler.js";
@@ -51,5 +51,14 @@ export const getUrlByShortCode = async(shortCode)=>{
 
 export const getUserUrls = async(userId)=>{
     const url = await findByUserId(userId);
+    return url;
+}
+
+export const deleteUserUrlService = async(urlId, userId)=>{
+    const url = await deleteById(urlId, userId);
+
+    if(!url){
+        throw new ApiError(404,"Url not found");
+    }
     return url;
 }
