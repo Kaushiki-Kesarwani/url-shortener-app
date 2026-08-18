@@ -20,8 +20,11 @@ export const findByIdUrl = async(urlId)=>{
     return url;
 }
 
-export const deleteById = async(urlId)=>{
-    const url = await Url.findByIdAndDelete(urlId);
+export const deleteById = async(urlId,userId)=>{
+    const url = await Url.findByIdAndDelete({
+      _id:urlId,
+      user:userId,
+    });
     return url;
 }
 
