@@ -36,3 +36,19 @@ export const incrementClicks = async(shortCode)=>{
     );
     return url;
 }
+
+export const updateUrl = async (urlId,userId,updatedData)=>{
+    return await Url.findOneAndUpdate(
+        {
+            _id:urlId,
+            user:userId
+        },
+        {
+            $set:updatedData
+        },
+         {
+            returnDocument:"after",
+            runValidators:true
+         }
+    ) 
+};
